@@ -8,3 +8,11 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
+
+window.activated = (...ids) => {
+    document.addEventListener('DOMContentLoaded', function () {
+        ids.forEach((id) => {
+            document.getElementById(id).classList.add('active');
+        });
+    });
+};

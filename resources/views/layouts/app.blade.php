@@ -35,5 +35,6 @@
     <!-- Scripts -->
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
     <script src="{{ mix('js/app.js') }}"></script>
+    @stack('scripts')
 </body>
 </html>

@@ -17,3 +17,7 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script>activated('users');</script>
+@endpush
