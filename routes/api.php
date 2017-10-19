@@ -13,3 +13,11 @@
 
 Route::post('login', 'LoginController@login');
 Route::post('logout', 'LoginController@logout');
+
+Route::group(['prefix' => 'users', 'middleware' => 'auth:api'], function() {
+    Route::get('/', 'UsersController@index');
+    Route::post('/', 'UsersController@store');
+    Route::get('/{id}', 'UsersController@show');
+    Route::post('/{id}', 'UsersController@update');
+    Route::delete('/{id}', 'UsersController@destroy');
+});
