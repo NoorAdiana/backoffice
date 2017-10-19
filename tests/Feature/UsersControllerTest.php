@@ -11,9 +11,12 @@ class UsersControllerTest extends TestCase
     /** @test */
     public function it_can_show_list_user()
     {
+        $users = factory(User::class)->create();
+
         $response = $this->actingAs($this->user)->get('users');
         $response->assertStatus(200);
         $response->assertViewIs('users.index');
+        $response->assertViewHas('users');
     }
 
     /** @test */
