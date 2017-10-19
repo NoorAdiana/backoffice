@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Services\UserService;
 use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 
 class UsersController extends Controller
 {
@@ -42,6 +43,35 @@ class UsersController extends Controller
 
         return redirect()->route('users.index')
             ->with(['status' => 'Input user success']);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $user = app(UserService::class)->find($id);
+
+        return view('users.edit', compact('user'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \App\Http\Requests\UpdateUserRequest  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(UpdateUserRequest $request, $id)
+    {
+        $updated = app(UserService::class)->update($id, $request->all());
+        
+        return $updated 
+            ? redirect()->route('users.index')->with(['status' => 'Update user success'])
+            : redirect()->route('users.index')->with(['status' => 'User not found']); 
     }
 
     /**

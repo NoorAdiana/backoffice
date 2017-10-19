@@ -40,6 +40,9 @@
                             <td>{{ $user->email }}</td>
                             <td>{{ $user->created_at->toDateString() }}</td>
                             <td class="text-center">
+                                <a href="{{ url('users', ['id' => $user->id]) }}" class="btn btn-warning btn-xs">
+                                    <i class="fa fa-pencil"></i>
+                                </a>
                                 <a href="{{ url('users', ['id' => $user->id]) }}" class="btn btn-danger btn-xs" onclick="event.preventDefault(); document.getElementById('logout-form-{{ $user->id }}').submit();">
                                     <i class="fa fa-close"></i>
                                 </a>

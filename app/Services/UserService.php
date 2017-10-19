@@ -20,6 +20,16 @@ class UserService
     {
         $this->model = $model;
     }
+    
+    /**
+     * Find model by id
+     * 
+     * @return \App\User
+     */
+    public function find($id)
+    {
+        return $this->model->findOrFail($id);
+    }
 
     /**
      * Store new resource user
@@ -32,6 +42,20 @@ class UserService
         $attributes = array_only($attributes, $this->model->getFillable());
 
         return $this->model->create($attributes);
+    }
+
+    /**
+     * Update user by given id
+     * 
+     * @param $id
+     * @param array $attributes
+     * @return bool
+     */
+    public function update($id, array $attributes)
+    {
+        $attributes = array_only($attributes, ['email', 'name']);
+
+        return $this->find($id)->update($attributes);
     }
 
     /**

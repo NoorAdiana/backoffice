@@ -56,14 +56,30 @@ class UsersControllerTest extends TestCase
     }
 
     /** @test */
+    public function it_can_update_user()
+    {
+        $user = factory(User::class)->create();
+
+        $response = $this->actingAs($this->user)->post("/users/{$user->id}", [
+            'id' => $user->id,
+            'name' => 'Nuradiyana',
+            'email' => 'nur@adiyana.com',
+            'password' => 'secretq',
+            'password_confirmation' => 'secretq'
+        ]);
+        
+        $newUser = User::find($user->id);
+        $this->assertNotEquals($user->name, $newUser->name);
+        $this->assertNotEquals($user->email, $newUser->email);
+        $this->assertFalse(Hash::check('secretq', $user->password));
+    }
+    
+    /** @test */
     public function it_can_delete_user()
     {
         $user = factory(User::class)->create();
 
-        $response = $this->actingAs($this->user)->delete("/users/{$user->id}");
-
-        $response->assertStatus(302);
-        $response->assertSessionHas('status');
+        $this->actingAs($this->user)->delete("/users/{$user->id}");
 
         $this->assertNull(User::find($user->id));
     }
