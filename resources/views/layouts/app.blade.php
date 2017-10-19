@@ -15,58 +15,21 @@
 </head>
 <body>
     <div class="wrapper" id="app">
-        <div class="sidebar" data-color="purple" data-image="{{ asset('img/sidebar-5.jpg') }}">
-            <div class="sidebar-wrapper">
-                <div class="logo">
-                    <a href="{{ route('home') }}" class="simple-text">Back Office</a>
-                </div>
-
-                <ul class="nav">
-                    <li class="active" id="dashboard">
-                        <a href="{{ route('home') }}">
-                            <i class="pe-7s-graph"></i>
-                            <p>Dashboard</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" id="users-management">
-                            <i class="pe-7s-users"></i>
-                            <p>Users Management</p>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-
+        @include('layouts.sidebar')
+        
         <div class="main-panel">
-            <nav class="navbar navbar-default navbar-fixed">
+            @include('layouts.navbar')
+            
+            <div class="content">
                 <div class="container-fluid">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <a class="navbar-brand" href="{{ route('home') }}">Dashboard</a>
-                    </div>
-                    <div class="collapse navbar-collapse">
-                        <ul class="nav navbar-nav navbar-right">
-                            <li><a href="#">Account</a></li>
-                            <li>
-                                <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                    Logout
-                                </a>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                    {{ csrf_field() }}
-                                </form>
-                            </li>
-                        </ul>
+                    <div class="row">
+                        @yield('content')
                     </div>
                 </div>
-            </nav>
+            </div>
+
+            @include('layouts.footer')
         </div>
-        @yield('content')
     </div>
 
     <!-- Scripts -->
