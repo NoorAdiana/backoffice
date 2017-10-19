@@ -51,4 +51,17 @@ class UsersControllerTest extends TestCase
         $this->assertEquals($user->email, 'nur@adiyana.com');
         $this->assertTrue(Hash::check('secret', $user->password));
     }
+
+    /** @test */
+    public function it_can_delete_user()
+    {
+        $user = factory(User::class)->create();
+
+        $response = $this->actingAs($this->user)->delete("/users/{$user->id}");
+
+        $response->assertStatus(302);
+        $response->assertSessionHas('status');
+
+        $this->assertNull(User::find($user->id));
+    }
 }

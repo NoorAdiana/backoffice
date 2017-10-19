@@ -43,4 +43,19 @@ class UsersController extends Controller
         return redirect()->route('users.index')
             ->with(['status' => 'Input user success']);
     }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $deleted = app(UserService::class)->delete($id);
+
+        return $deleted 
+            ? back()->with(['status' => 'Delete user success'])
+            : back()->with(['status' => 'User not found']); 
+    }
 }

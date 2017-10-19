@@ -30,6 +30,7 @@
                     <th>Name</th>
                     <th>Email</th>
                     <th>Created At</th>
+                    <th class="text-center">Action</th>
                 </thead>
                 <tbody>
                     @foreach($users as $user)
@@ -38,6 +39,15 @@
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
                             <td>{{ $user->created_at->toDateString() }}</td>
+                            <td class="text-center">
+                                <a href="{{ url('users', ['id' => $user->id]) }}" class="btn btn-danger btn-xs" onclick="event.preventDefault(); document.getElementById('logout-form-{{ $user->id }}').submit();">
+                                    <i class="fa fa-close"></i>
+                                </a>
+                                <form id="logout-form-{{$user->id}}" action="{{ url('users', ['id' => $user->id]) }}" method="POST" style="display: none;">
+                                    <input type="hidden" value="DELETE" name="_method">
+                                    {{ csrf_field() }}
+                                </form>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>

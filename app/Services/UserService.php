@@ -44,4 +44,17 @@ class UserService
     {
         return $this->model->paginate($perPage);
     }
+
+    /**
+     * Delete resource by given id
+     * 
+     * @param $id
+     * @return bool
+     */
+    public function delete($id) 
+    {
+        $model = $this->model->find($id);
+
+        return $model ? $model->delete() : false;
+    }
 }

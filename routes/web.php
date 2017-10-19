@@ -32,4 +32,5 @@ Route::group(['prefix' => 'users', 'middleware' => 'auth'], function() {
     Route::get('/', 'UsersController@index')->name('users.index');
     Route::get('/create', 'UsersController@create')->name('users.create');
     Route::post('/', 'UsersController@store')->name('users.store');
+    Route::delete('/{id}', 'UsersController@destroy')->name('users.delete');
 });
