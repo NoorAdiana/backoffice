@@ -30,4 +30,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['prefix' => 'users', 'middleware' => 'auth'], function() {
     Route::get('/', 'UsersController@index')->name('users.index');
+    Route::get('/create', 'UsersController@create')->name('users.create');
+    Route::post('/', 'UsersController@store')->name('users.store');
 });
