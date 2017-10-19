@@ -12,7 +12,7 @@
                 </a>
             </li>
             <li>
-                <a href="#" id="users-management">
+                <a href="{{ route('users.index') }}" id="users-management">
                     <i class="pe-7s-users"></i>
                     <p>Users Management</p>
                 </a>
